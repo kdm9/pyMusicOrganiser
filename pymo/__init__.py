@@ -2,29 +2,11 @@ from __future__ import print_function
 import os
 import sys
 import id3reader
-import docopt
+import re
 
-_PROGRAM_ARGS = """
-USAGE:
-    pymo [-f <format>] [-v] [-n] [(-l|-c|-m)]  -i <inputdir> -o <outputdir>
-
-OPTIONS:
-    -n      Do a dry run (just print which files would be moved)
-    -f      Format, where:
-                %n:  Song title
-                %t:  Track number
-                %a:  Album
-                %p:  Performer
-                %g:  Genre
-                %c:  Comment
-                %y:  Release year
-    -m      Move files (DEFAULT)
-    -c      Copy files
-    -l      Symlink files
-    -v      Be verbose (prints move/link/copy commands even if not a dry run)
-"""
 
 TAGS = ['album', 'comment', 'performer', 'title', 'track', 'year', 'genre']
+
 
 TAG_FORMATS = {
     'album': "%a",
@@ -69,8 +51,7 @@ def _walk(rootdir, excludedirs=[]):
     return soundfiles
 
 
-def main():
-    opts = docopt.docopt(_PROGRAM_ARGS)
+def main(opts):
     indir = opts["<inputdir>"]
     outdir = opts["<outputdir>"]
     fmt = opts["<format>"]
