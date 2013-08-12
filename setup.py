@@ -31,7 +31,7 @@ setup(
             "(GPLv3+)",
         ],
     test_suite="test",
-#    scripts=["bin/pymo",],
+    scripts=["bin/pymo",],
 #    data_files=[
 #        ("share/doc/pymo", ["README.txt",]),
 #        ]
